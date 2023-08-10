@@ -13,3 +13,37 @@
  *= require_tree .
  *= require_self
  */
+
+ /* app/assets/stylesheets/application.css */
+ #items-list {
+    margin: 20px;
+  }
+  
+  .item {
+    background-color: #0033AA;
+    padding: 10px;
+    margin-bottom: 20px;
+    border: 2px solid #FF6600;
+  }
+  
+  .item h2,
+  .item h3 {
+    color: #FFEE00;
+  }
+  
+  .item h3 {
+    border-bottom: 1px dotted #FF6600;
+  }
+  
+  .item ul {
+    list-style-type: square;
+  }
+  
+  .item li {
+    color: #FFFFFF;
+  }
+  
+  .item p {
+    color: #FF6600;
+  }
+  

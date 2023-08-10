@@ -1,2 +1,5 @@
 class Customer < ApplicationRecord
-end
+    has_many :rentals
+    has_many :movies, through: :rentals
+  end
+  

@@ -1,10 +1,10 @@
-<p style="color: green"><%= notice %></p>
-
-<%= render @movie %>
-
-<div>
-  <%= link_to "Edit this movie", edit_movie_path(@movie) %> |
-  <%= link_to "Back to movies", movies_path %>
-
-  <%= button_to "Destroy this movie", @movie, method: :delete %>
-</div>
+<% if @movie.current_customer %>
+  <p>Customer: <%= @movie.current_customer.name %></p>
+<% else %>
+  <p>No customer has rented this movie.</p>
+<% end %>
+<%= form_with url: rentals_path do |form| %>
+  <%= form.hidden_field :movie_id, value: @movie.id %>
+  <%= form.collection_select :customer_id, Customer.all, :id, :name %>
+  <%= form.submit "Rent Movie" %>
+<% end %>

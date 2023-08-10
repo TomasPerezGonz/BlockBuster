@@ -1,35 +1,20 @@
-<p style="color: green"><%= notice %></p>
-
 <h1>Customers</h1>
 
-<div id="customers">
-  <table class="table table-bordered"> 
-    <thead>
-      <tr>
-        <th>Customer Name</th>
-        <th>Status</th>
-        <th>Actions</th>
-      </tr>
-    </thead>
-    <tbody>
-      <% @customers.each do |customer| %>
-        <tr>
-          <td><%= customer.name %></td>
-          <td>
-            <% if customer.movie %>
-              Tiene arrendada la película: <%= customer.movie.name %>
-            <% else %>
-              No tiene ninguna película arrendada.
-            <% end %>
-          </td>
-          <td>
-            <%= link_to "Show", customer, class: "btn btn-primary" %> 
-          </td>
-        </tr>
+<div id="items-list">
+  <% @customers.each do |customer| %>
+    <div class="item">
+      <h2>Name: <%= customer.name %></h2>
+      
+      <% if customer.movies.any? %>
+        <h3>Movies Rented:</h3>
+        <ul>
+          <% customer.movies.each do |movie| %>
+            <li><%= movie.name %>: <%= movie.description %></li>
+          <% end %>
+        </ul>
+      <% else %>
+        <p>Este cliente aún no arrienda ninguna pelicula.</p>
       <% end %>
-    </tbody>
-  </table>
+    </div>
+  <% end %>
 </div>
-
-<%= link_to "New customer", new_customer_path, class: "btn btn-success" %> 
-

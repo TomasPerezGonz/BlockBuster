@@ -1,14 +1,21 @@
-<p style="color: green"><%= notice %></p>
-
 <h1>Movies</h1>
 
-<div id="movies">
+<div id="items-list">
   <% @movies.each do |movie| %>
-    <%= render movie %>
-    <p>
-      <%= link_to "Show this movie", movie %>
-    </p>
+    <div class="item">
+      <h2>Name: <%= movie.name %></h2>
+      <p>Description: <%= movie.description %></p>
+      
+      <% if movie.customers.any? %>
+        <h3>Rented by:</h3>
+        <ul>
+          <% movie.customers.each do |customer| %>
+            <li><%= customer.name %></li>
+          <% end %>
+        </ul>
+      <% else %>
+        <p>Esta película aún no ha sido arrendada.</p>
+      <% end %>
+    </div>
   <% end %>
 </div>
-
-<%= link_to "New movie", new_movie_path %>

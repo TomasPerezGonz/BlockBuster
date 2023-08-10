@@ -1,5 +1,5 @@
 <div id="<%= dom_id movie %>">
-  <p>
+   <p>
     <strong>Name:</strong>
     <%= movie.name %>
   </p>
@@ -10,8 +10,13 @@
   </p>
 
   <p>
-    <strong>Customer:</strong>
-    <%= movie.customer_id %>
+    <strong>Customers:</strong>
+    <% if movie.customers.any? %>
+      <% movie.customers.each do |customer| %>
+        <%= customer.name %>
+      <% end %>
+    <% else %>
+      No customer has rented this movie.
+    <% end %>
   </p>
-
 </div>
