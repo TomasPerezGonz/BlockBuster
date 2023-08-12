@@ -1,3 +1,4 @@
+
 <h1>Customers</h1>
 
 <div id="items-list">
@@ -9,12 +10,23 @@
         <h3>Movies Rented:</h3>
         <ul>
           <% customer.movies.each do |movie| %>
-            <li><%= movie.name %>: <%= movie.description %></li>
+            <li>
+              <%= movie.name %>: <%= movie.description %>
+              <%= button_to "Remove", remove_customer_movie_path(movie, customer_id: customer.id), method: :delete %>
+
+            </li>
           <% end %>
         </ul>
       <% else %>
         <p>Este cliente aún no arrienda ninguna pelicula.</p>
       <% end %>
+
+      <%= form_with url: assign_movie_customer_path(customer), method: :post do |form| %>
+        <%= form.collection_select :movie_id, Movie.all, :id, :name, prompt: 'Select a Movie' %>
+        <%= form.hidden_field :customer_id, value: customer.id %>
+        <%= form.submit "Assign Movie" %>
+      <% end %>
+
     </div>
   <% end %>
 </div>

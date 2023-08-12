@@ -46,4 +46,22 @@
   .item p {
     color: #FF6600;
   }
+
+  .navbar {
+    background-color: #0000FF; 
+    padding: 10px 0;
+    text-align: center;
+  }
+  
+  .navbar a {
+    color: #FFFF00; 
+    margin: 0 15px;
+    text-decoration: none;
+    font-weight: bold;
+    font-family: 'Courier New', Courier, monospace;
+  }
+  
+  .navbar a:hover {
+    text-decoration: underline;
+  }
   

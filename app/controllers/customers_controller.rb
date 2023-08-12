@@ -1,5 +1,5 @@
 class CustomersController < ApplicationController
-  before_action :set_customer, only: %i[ show edit update destroy ]
+  before_action :set_customer, only: %i[show edit update destroy]
 
   # GET /customers or /customers.json
   def index
@@ -50,11 +50,26 @@ class CustomersController < ApplicationController
   # DELETE /customers/1 or /customers/1.json
   def destroy
     @customer.destroy
-
     respond_to do |format|
       format.html { redirect_to customers_url, notice: "Customer was successfully destroyed." }
       format.json { head :no_content }
     end
+  end
+
+  # POST /customers/:id/assign_movie
+  def assign_movie
+    @customer = Customer.find(params[:id])  # Usando :id en lugar de :customer_id
+    @movie = Movie.find(params[:movie_id])
+    @customer.movies << @movie unless @customer.movies.include?(@movie)
+    redirect_to customers_path
+  end
+
+  # DELETE /customers/:id/remove_movie/:movie_id
+  def remove_movie
+    @customer = Customer.find(params[:id])  # Usando :id en lugar de :customer_id
+    @movie = Movie.find(params[:movie_id])
+    @customer.movies.delete(@movie)
+    redirect_to customers_path, notice: "Movie removed from the customer."
   end
 
   private

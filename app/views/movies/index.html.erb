@@ -10,12 +10,21 @@
         <h3>Rented by:</h3>
         <ul>
           <% movie.customers.each do |customer| %>
-            <li><%= customer.name %></li>
+            <li>
+              <%= customer.name %>
+              <%= button_to "Remove", remove_customer_movie_path(movie, customer_id: customer.id), method: :delete %>
+            </li>
           <% end %>
         </ul>
       <% else %>
         <p>Esta película aún no ha sido arrendada.</p>
       <% end %>
+
+      <%= form_with url: assign_customer_movie_path(movie), method: :post do |form| %>
+        <%= form.collection_select :customer_id, Customer.all, :id, :name, prompt: 'Select a Customer' %>
+        <%= form.submit "Assign Customer" %>
+      <% end %>
+
     </div>
   <% end %>
 </div>
